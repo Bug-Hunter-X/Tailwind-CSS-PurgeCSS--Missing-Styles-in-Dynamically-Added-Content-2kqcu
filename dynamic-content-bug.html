@@ -1,0 +1,12 @@
+This bug occurs when using Tailwind CSS with dynamically generated content.  The issue is that Tailwind's purge functionality might not correctly identify all the classes used in the dynamically added content, leading to missing styles. This is because the purge process happens during the build, whereas the dynamic content is often added after the initial page load. For example:
+
+```html
+<div id="dynamic-content"></div>
+
+<script>
+  const div = document.getElementById('dynamic-content');
+  div.innerHTML = '<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dynamic Button</button>';
+</script>
+```
+
+Here, the `bg-blue-500`, `hover:bg-blue-700`, etc. classes might be purged if not explicitly listed in your Tailwind configuration, resulting in a button without any styling.
